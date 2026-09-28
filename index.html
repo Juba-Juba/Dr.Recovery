@@ -14,18 +14,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base id="app-base" href="/">
-  <script>
-    (function () {
-      var base = document.getElementById('app-base');
-      var host = location.hostname.toLowerCase();
-      if (host === 'juba-juba.github.io') {
-        base.setAttribute('href', '/Dr.Recovery/');
-      } else {
-        base.setAttribute('href', '/');
-      }
-    })();
-  </script>
+  <base href="/">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,65 +35,14 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <div id="app-loading" style="
-    position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-    background:#F5F8F7;color:#126E66;font-family:Arial,Tahoma,sans-serif;
-    z-index:999999;text-align:center;padding:24px">
-    <div>
-      <div style="font-size:30px;font-weight:700;margin-bottom:10px">Dr. Recovery</div>
-      <div id="app-loading-text" style="font-size:15px">جاري تحميل البرنامج...</div>
-    </div>
-  </div>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
 
-  <script>
-    window.addEventListener('flutter-first-frame', function () {
-      var el = document.getElementById('app-loading');
-      if (el) el.remove();
-    });
-
-    function showStartupError(message) {
-      var t = document.getElementById('app-loading-text');
-      if (t) t.textContent = message || 'تعذر تشغيل التطبيق. جرّب تحديث الصفحة.';
-    }
-
-    window.addEventListener('error', function (e) {
-      console.error('Dr. Recovery startup error:', e.error || e.message || e);
-      showStartupError('حدث خطأ أثناء تشغيل التطبيق. جرّب Ctrl + F5.');
-    });
-
-    window.addEventListener('unhandledrejection', function (e) {
-      console.error('Dr. Recovery unhandled promise rejection:', e.reason || e);
-      showStartupError('حدث خطأ أثناء تشغيل التطبيق. جرّب Ctrl + F5.');
-    });
-
-    (async function () {
-      try {
-        // Remove service workers from older deployments to avoid stale Flutter files.
-        if ('serviceWorker' in navigator) {
-          var regs = await navigator.serviceWorker.getRegistrations();
-          await Promise.all(regs.map(function (r) { return r.unregister(); }));
-        }
-
-        if ('caches' in window) {
-          var keys = await caches.keys();
-          await Promise.all(
-            keys.filter(function (k) {
-              return /flutter|dr.?recovery/i.test(k);
-            }).map(function (k) { return caches.delete(k); })
-          );
-        }
-      } catch (e) {
-        console.warn('Old cache cleanup skipped:', e);
-      }
-
-      var s = document.createElement('script');
-      s.src = 'flutter_bootstrap.js?v=20260927';
-      s.async = true;
-      s.onerror = function () {
-        showStartupError('تعذر تحميل ملفات التطبيق.');
-      };
-      document.body.appendChild(s);
-    })();
-  </script>
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
